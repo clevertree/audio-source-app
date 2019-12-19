@@ -1,0 +1,3 @@
+[submodule "audio-source"]
+	path = audio-source
+	url = ssh://git@github.com/clevertree/audio-source-composer
