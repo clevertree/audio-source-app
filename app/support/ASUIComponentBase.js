@@ -6,67 +6,92 @@ import {
     ScrollView,
     View,
     Text,
-    StatusBar,
+    StatusBar, ImageBackground,
 } from 'react-native';
 import {DebugInstructions, Header, LearnMoreLinks, ReloadInstructions} from "react-native/Libraries/NewAppScreen";
+import Colors from "react-native/Libraries/NewAppScreen/components/Colors";
+
 
 
 class ASUIComponentBase extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props={}) {
+        super(props);
+        this.attributes = [];
         this.state = {
         };
     }
-    render() {
-        console.log('wut');
-        return (
-            <View>
-                <StatusBar barStyle="dark-content" />
-                <SafeAreaView>
-                    <ScrollView
-                        contentInsetAdjustmentBehavior="automatic"
-                        style={styles.scrollView}>
-                        <Header />
-                        <Country/>
-                        {global.HermesInternal == null ? null : (
-                            <View style={styles.engine}>
-                                <Text style={styles.footer}>Engine: Hermes</Text>
-                            </View>
-                        )}
-                        <View style={styles.body}>
-                            <View style={styles.sectionContainer}>
-                                <Text style={styles.sectionTitle}>Step One</Text>
-                                <Text style={styles.sectionDescription}>
-                                    Edit <Text style={styles.highlight}>App.js</Text> to change this
-                                    screen and then come back to see your edits.
-                                </Text>
-                            </View>
-                            <View style={styles.sectionContainer}>
-                                <Text style={styles.sectionTitle}>See Your Changes</Text>
-                                <Text style={styles.sectionDescription}>
-                                    <ReloadInstructions />
-                                </Text>
-                            </View>
-                            <View style={styles.sectionContainer}>
-                                <Text style={styles.sectionTitle}>Debug</Text>
-                                <Text style={styles.sectionDescription}>
-                                    <DebugInstructions />
-                                </Text>
-                            </View>
-                            <View style={styles.sectionContainer}>
-                                <Text style={styles.sectionTitle}>Learn More</Text>
-                                <Text style={styles.sectionDescription}>
-                                    Read the docs to discover what to do next:
-                                </Text>
-                            </View>
-                            <LearnMoreLinks />
-                        </View>
-                    </ScrollView>
-                </SafeAreaView>
-            </View>
-        );
+
+    getChildren() {
+        const each = (child) =>  {
+            if(typeof child === "function")
+                child = child(this);
+            if(child === null);
+            else if(Array.isArray(child)) {
+                for(let i=0; i<child.length; i++) {
+                    child[i] = each(child[i]);
+                }
+            } else if(typeof child !== "object") {
+                child = <Text>${child}</Text>;
+            }
+            return child;
+        };
+
+        const children = this.props.children || null;
+        return each(children);
     }
+
+    createStyleSheetLink(stylePath) {
+        return null;
+    }
+
+    // renderAttributes() {
+    //     // React Native has no attributes
+    // }
+
+    // renderOS() {
+    //     this.forceUpdate();
+    // }
+    // forceUpdate() {
+    //     this.renderHTML();
+    // }
+
+
+    render() {
+        let children = this.getChildren();
+        if(typeof children === "function")
+            children = children(this);
+        console.log("ASUIComponentBase.render", children);
+        if(typeof children !== 'object')
+            children = <Text>${children}</Text>;
+        // if(typeof children === "undefined")
+        //     throw new Error("Invalid ASUIDiv content: " + typeof children);
+        return children;
+    }
+
+    static createElement(props, children=null, ...additionalProps) {
+        props = this.processProps(props, additionalProps);
+        const React = require('react');
+        const thisClass = this;
+        console.log('React.createElement', React.createElement, thisClass, children);
+        const ret = React.createElement(thisClass, props, children);
+        return ret;
+    }
+
+    static processProps(props, additionalProps=[]) {
+        if(typeof props === "string")
+            props = {class: props};
+        if(typeof props !== "object")
+            throw new Error("Invalid props: " + typeof props);
+        for(let i=0; i<additionalProps.length; i++)
+            Object.assign(props, additionalProps[i]);
+        // if(props.attrClass) {
+        //    if(!props.attrs) props.attrs = {};
+        //    props.attrs.class = props.attrClass;
+        // }
+        return props;
+    }
+
 }
 
 export default ASUIComponentBase;
