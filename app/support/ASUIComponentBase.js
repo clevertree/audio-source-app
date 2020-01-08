@@ -41,9 +41,9 @@ class ASUIComponentBase extends React.Component {
         return each(children);
     }
 
-    createStyleSheetLink(stylePath) {
-        return null;
-    }
+    // createStyleSheetLink(stylePath) {
+    //     return null;
+    // }
 
     // renderAttributes() {
     //     // React Native has no attributes
@@ -61,7 +61,7 @@ class ASUIComponentBase extends React.Component {
         let children = this.getChildren();
         if(typeof children === "function")
             children = children(this);
-        console.log("ASUIComponentBase.render", children);
+        // console.log("ASUIComponentBase.render", children);
         if(typeof children !== 'object')
             children = <Text>${children}</Text>;
         // if(typeof children === "undefined")
@@ -73,7 +73,7 @@ class ASUIComponentBase extends React.Component {
         props = this.processProps(props, additionalProps);
         const React = require('react');
         const thisClass = this;
-        console.log('React.createElement', React.createElement, thisClass, children);
+        // console.log('React.createElement', React.createElement, thisClass, children);
         const ret = React.createElement(thisClass, props, children);
         return ret;
     }

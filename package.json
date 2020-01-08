@@ -15,6 +15,7 @@
     "bad-words": "^3.0.3"
   },
   "devDependencies": {
+    "@react-native-community/slider": "^2.0.8",
     "@babel/core": "7.7.7",
     "@babel/runtime": "7.7.7",
     "@react-native-community/eslint-config": "0.0.5",
