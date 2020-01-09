@@ -34,7 +34,7 @@ class App extends React.Component {
     };
   }
   render() {
-    console.log('wut');
+    // console.log('wut');
     return (
       <View>
         <StatusBar barStyle="dark-content" />
