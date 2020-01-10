@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.snesologyapp"
+        applicationId "io.audiosource"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

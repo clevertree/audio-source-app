@@ -1,4 +1,4 @@
-package com.snesologyapp;
+package io.audiosource;
 
 import com.facebook.react.ReactActivity;
 

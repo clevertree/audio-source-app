@@ -1,4 +1,4 @@
-package com.snesologyapp;
+package io.audiosource;
 
 import android.app.Application;
 import android.content.Context;
