@@ -1,111 +1,70 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import MenuDrawer from 'react-native-side-drawer';
 
 const {AudioSourcePlayerElement} = require('./audio-source/player/audio-source-player.js');
 // const ASUIComponentBase = require('./app/support/ASUIComponentBase.js').default;
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      open: false
     };
   }
-  render() {
-    // console.log('wut');
+
+  toggleOpen = () => {
+    this.setState({ open: !this.state.open });
+  };
+
+  drawerContent = () => {
     return (
-      <View>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={styles.scrollView}>
-            <AudioSourcePlayerElement/>
-          </ScrollView>
-        </SafeAreaView>
-      </View>
+        <TouchableOpacity onPress={this.toggleOpen} style={styles.animatedBox}>
+          <Text>Close</Text>
+        </TouchableOpacity>
+    );
+  };
+
+  render() {
+    return (
+        <View style={styles.container}>
+          <MenuDrawer
+              open={this.state.open}
+              drawerContent={this.drawerContent()}
+              drawerPercentage={45}
+              animationTime={250}
+              overlay={true}
+              opacity={0.4}
+          >
+            <TouchableOpacity onPress={this.toggleOpen} style={styles.body}>
+              <AudioSourcePlayerElement />
+            </TouchableOpacity>
+          </MenuDrawer>
+        </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    // alignItems: "center",
+    // justifyContent: "center",
+    // marginTop: 30,
+    zIndex: 0
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  animatedBox: {
+    flex: 1,
+    backgroundColor: "#38C8EC",
+    padding: 10
   },
   body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
-
-  class Country extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {loading: true, error: null, country: null};
-    }
-
-    componentDidMount() {
-    }
-
-    render() {
-      return (
-          <View>
-            <Text/>
-            <Text className="country-name">Text</Text>
-          </View>
-      );
-    }
+    flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    backgroundColor: '#F04812'
   }
+});
 
 export default App;
