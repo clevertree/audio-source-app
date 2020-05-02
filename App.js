@@ -5,9 +5,8 @@ import {
   SafeAreaView,
   Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import MenuDrawer from 'react-native-side-drawer';
+import {ASPlayer} from './audio-source/player';
 
-const {AudioSourcePlayerElement} = require('./audio-source/player/audio-source-player.js');
-// const ASUIComponentBase = require('./app/support/ASUIComponentBase.js').default;
 
 class App extends React.Component {
   constructor(props) {
@@ -16,11 +15,13 @@ class App extends React.Component {
       menuOpen: false
     };
 
-    setTimeout(e => this.toggleMenu(), 200);
+    // setTimeout(e => this.toggleMenu(), 200);
   }
 
   toggleMenu = () => {
     this.setState({ menuOpen: !this.state.menuOpen });
+    if(!this.state.menuOpen)
+      this.playerElm.switchToMenu(null);
   };
 
   updateMenu = () => {
@@ -46,14 +47,14 @@ class App extends React.Component {
             open={this.state.menuOpen}
             drawerContent={this.drawerContent()}
             drawerPercentage={55}
-            animationTime={50}
+            animationTime={this.state.menuOpen ? 250 : 50}
             overlay={true}
             opacity={1.0}
             >
             <SafeAreaView>
               <TouchableWithoutFeedback onPress={this.state.menuOpen ? this.toggleMenu : null}>
                 <View>
-                  <AudioSourcePlayerElement
+                  <ASPlayer
                     ref = {ref => this.playerElm = ref}
                     onToggleMenu={this.toggleMenu}
                     onUpdateMenu={this.updateMenu}

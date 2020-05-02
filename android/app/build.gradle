@@ -191,6 +191,8 @@ android {
 }
 
 dependencies {
+    implementation project(':@react-native-community_async-storage')
+    implementation project(':rn-range-slider')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
