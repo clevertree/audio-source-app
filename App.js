@@ -31,8 +31,8 @@ class App extends React.Component {
 
   drawerContent = () => {
     let content = <Text>Close</Text>;
-    if(this.playerElm)
-      content = this.playerElm.renderMenu();
+    // if(this.playerElm)
+    //   content = this.playerElm.renderMenu();
     return (
         <TouchableOpacity onPress={this.toggleMenu}>
           <View style={styles.menuContainer}>{content}</View>
