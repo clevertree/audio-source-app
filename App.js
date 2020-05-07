@@ -43,9 +43,9 @@ class App extends React.Component {
 
   render() {
     return (
-        // <SafeAreaView>
+        <SafeAreaView style={{flex:1}}>
           <ASComposer />
-        // </SafeAreaView>
+        </SafeAreaView>
     );
   }
 }
