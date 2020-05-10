@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
+    "@react-native-community/cli-debugger-ui": "3.0.0",
     "@react-native-community/async-storage": "^1.9.0",
     "appcenter": "3.0.2",
     "appcenter-analytics": "3.0.2",
@@ -22,7 +23,7 @@
     "fili": "^2.0.3",
     "lz-string": "^1.4.4",
     "react": "^16.13.1",
-    "react-native": "^0.62.2",
+    "react-native": "0.62.0",
     "react-native-restart": "^0.0.15",
     "react-native-side-drawer": "^1.2.5",
     "react-native-webview": "^9.4.0",
